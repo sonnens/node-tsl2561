@@ -1,0 +1,12 @@
+{
+  "name": "tsl2561",
+  "version": "0.0.1",
+  "description": "node interface for the TSL2561 luminosity sensor",
+  "main": "main.js",
+  "author": "John Sonnenschein",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sonnens/node-tsl2561"
+  },
+  "license": "BSD"
+} 
