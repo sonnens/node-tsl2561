@@ -109,22 +109,27 @@ Tsl2561::Lux(const v8::Arguments& args) {
   obj->readUint(obj->fd, TSL2561_REG_DATA_1,&data1);
   if (data0 == 0xFFFF || data1 == 0xFFFF)
     ThrowException(Exception::Error(String::New("Device Saturated")));
-  d0 =  data0; 
-  d1 =  data1; 
-  ratio = d0/d1;
-  return scope.Close(Number::New(data0));
+  d0 =  data0;
+  d1 =  data1;
+
+  ratio = d1/d0;
+
   d0 *= (402.0/101.0);
   d1 *= (402.0/101.0);
-  if (ratio < 0.5)
+  d0 *= 16.0;
+  d1 *= 16.0;
+  if (ratio < 0.5) {
     lux = 0.0304 * d0 - 0.062 * d0 * pow(ratio,1.4);
-  else if (ratio < 0.61)
+  } else if (ratio < 0.61) {
     lux = 0.0224 * d0 - 0.031 * d1;
-  else if (ratio < 0.8)
+  } else if (ratio < 0.8) {
     lux = 0.0128 * d0 - 0.0153 * d1;
-  else if (ratio < 1.30)
+  } else if (ratio < 1.30) {
      lux = 0.00146 * d0 - 0.00112 * d1;
-  else
+  } else {
     lux = 0.0;
+  }
+
   return scope.Close(Number::New(lux));
 }
 
