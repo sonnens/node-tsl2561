@@ -1,4 +1,4 @@
-# htu21d
+# tsl2561 
 
 node interface for the TSL2561 luminosity sensor
 
